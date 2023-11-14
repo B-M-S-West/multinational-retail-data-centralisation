@@ -10,7 +10,6 @@ data_cleaning = DataCleaning()
 # Connect and read the database
 db_connector.init_db_engine()
 
-
 # Extract and clean the user data
 user_data = data_extractor.read_rds_table(db_connector, 'legacy_users')  
 cleaned_user_data = data_cleaning.clean_user_data(user_data)
