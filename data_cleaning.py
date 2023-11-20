@@ -14,9 +14,15 @@ class DataCleaning:
             # Removes the NULL values
             df_clean = df_clean.dropna()
             return df_clean
-        
+
 
         def clean_card_data(self, df):
             df = df.dropna()
             df = df.replace('Err', pd.NA)
+            return df
+
+
+        @staticmethod
+        def clean_store_data(df):
+            # Add your data cleaning steps here
             return df
