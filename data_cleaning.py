@@ -21,8 +21,26 @@ class DataCleaning:
             df = df.replace('Err', pd.NA)
             return df
 
-
         @staticmethod
         def clean_store_data(df):
-            # Add your data cleaning steps here
+            df = df.dropna()
             return df
+
+
+        def convert_product_weights(self, products: pd.DataFrame) -> pd.DataFrame:
+            products['weight_unit'] = products['weight'].str.extract(r'(\D+)')
+            products['weight'] = products['weight'].str.replace(r'[^\d\.]', '')
+            products['weight'] = pd.to_numeric(products['weight'], errors='coerce')
+            products['weight_unit'] = products['weight_unit'].str.lower()
+            products.loc[products['weight_unit'] == 'g', 'weight'] /= 1000
+            products.loc[products['weight_unit'] == 'ml', 'weight'] /= 1000
+            products.drop('weight_unit', axis=1, inplace=True)
+            return products
+
+
+        def clean_products_data(self, products: pd.DataFrame) -> pd.DataFrame:
+            products.dropna(inplace=True)
+            products.drop_duplicates(inplace=True)
+            products.columns = products.columns.str.lower()
+            products = self.convert_product_weights(products)
+            return products
