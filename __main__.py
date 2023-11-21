@@ -3,7 +3,6 @@ from data_extraction import DataExtractor
 from database_utils import DatabaseConnector
 
 headers = {"x-api-key": "yFBQbwXe9J3sd6zWVAMrK6lcxxr0q1lr2PT6DDMX"}
-s3_address = "s3://data-handling-public/products.csv"
 
 db_connector = DatabaseConnector()
 data_extractor = DataExtractor(headers)
@@ -38,10 +37,26 @@ db_connector.upload_to_db(cleaned_store_data, 'dim_store_details', db_creds['RDS
 
 # Extract product information from s3_address
 s3_address = "s3://data-handling-public/products.csv"
-product_information = data_extractor.extract_from_s3(s3_address)
+product_key = 'products.csv'
+product_information = data_extractor.extract_from_s3(s3_address, product_key)
 
 # Clean the product information before uploading
 cleaned_product_data = data_cleaning.clean_products_data(product_information)
 
 # Upload the cleaned card data to the 'dim_card_details
 db_connector.upload_to_db(cleaned_product_data, 'dim_products', db_creds['RDS_DATABASE'], db_creds['RDS_USER'], db_creds['RDS_PASSWORD'], db_creds['RDS_HOST'], db_creds['RDS_PORT'])
+
+# Extract and clean the orders data
+orders_data = data_extractor.read_rds_table(db_connector, 'orders_table')  
+cleaned_orders_data = data_cleaning.clean_orders_data(orders_data)
+
+# Upload the cleaned orders data to the 'orders_table' table
+db_connector.upload_to_db(cleaned_orders_data, 'orders_table', db_creds['RDS_DATABASE'], db_creds['RDS_USER'], db_creds['RDS_PASSWORD'], db_creds['RDS_HOST'], db_creds['RDS_PORT'])
+
+# Extracting date events data
+date_key = 'date_details.json'
+s3_address = 'https://data-handling-public.s3.eu-west-1.amazonaws.com/date_details.json'
+events_data = data_extractor.extract_from_s3_json(s3_address, date_key)
+
+# Upload the cleaned orders data to the 'orders_table' table
+db_connector.upload_to_db(events_data, 'dim_date_times', db_creds['RDS_DATABASE'], db_creds['RDS_USER'], db_creds['RDS_PASSWORD'], db_creds['RDS_HOST'], db_creds['RDS_PORT'])

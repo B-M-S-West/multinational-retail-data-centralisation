@@ -44,3 +44,8 @@ class DataCleaning:
             products.columns = products.columns.str.lower()
             products = self.convert_product_weights(products)
             return products
+
+
+        def clean_orders_data(self, df):
+            df.drop(['first_name', 'last_name', '1'], axis=1, inplace=True)
+            return df

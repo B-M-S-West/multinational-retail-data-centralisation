@@ -1,5 +1,6 @@
 import requests
 import boto3
+import json
 from botocore import UNSIGNED
 from botocore.config import Config
 import pandas as pd
@@ -42,9 +43,17 @@ class DataExtractor:
         return pd.DataFrame(data)
 
 
-    def extract_from_s3(self, s3_address: str) -> pd.DataFrame:
+    def extract_from_s3(self, s3_address: str, key) -> pd.DataFrame:
         s3 = boto3.client('s3', config=Config(signature_version=UNSIGNED))
-        obj = s3.get_object(Bucket='data-handling-public', Key='products.csv')
+        obj = s3.get_object(Bucket='data-handling-public', Key=key)
         df = pd.read_csv(obj['Body'])
         return df
-        
+
+
+    def extract_from_s3_json(self, s3_address: str, key):
+        s3 = boto3.client('s3', config=Config(signature_version=UNSIGNED))
+        obj = s3.get_object(Bucket='data-handling-public', Key=key)
+        file_content = obj.get('Body').read().decode('utf-8')
+        json_content = json.loads(file_content)
+        df = pd.DataFrame(json_content)
+        return df
