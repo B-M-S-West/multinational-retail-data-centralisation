@@ -1,9 +1,9 @@
-import requests
 import boto3
-import json
 from botocore import UNSIGNED
 from botocore.config import Config
+import json
 import pandas as pd
+import requests
 import tabula
 
 
@@ -15,12 +15,10 @@ class DataExtractor:
         data = pd.read_sql_table(table_name, engine)
         return data    
 
-
     def retrieve_pdf_data(self, link):
         dfs = tabula.read_pdf(link, pages='all')
         df = pd.concat(dfs)
         return df
-
 
     def __init__(self, headers):
         self.headers = headers
@@ -33,7 +31,6 @@ class DataExtractor:
             print(f"Request failed with status code: {response.status_code}")
             print(f"Response Text: {response.text}")
 
-
     def retrieve_stores_data(self, endpoint, num_stores):
         number_of_stores = num_stores['number_stores']
         data = []
@@ -42,13 +39,11 @@ class DataExtractor:
             data.append(store_data.json())
         return pd.DataFrame(data)
 
-
     def extract_from_s3(self, s3_address: str, key) -> pd.DataFrame:
         s3 = boto3.client('s3', config=Config(signature_version=UNSIGNED))
         obj = s3.get_object(Bucket='data-handling-public', Key=key)
         df = pd.read_csv(obj['Body'])
         return df
-
 
     def extract_from_s3_json(self, s3_address: str, key):
         s3 = boto3.client('s3', config=Config(signature_version=UNSIGNED))

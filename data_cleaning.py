@@ -3,7 +3,8 @@ import pandas as pd
 
 class DataCleaning:
     # Make a copy of the DataFrame to avoid modifying the original data
-        
+
+
         def clean_user_data(self, df):
             df_clean = df.copy()
 
@@ -15,7 +16,6 @@ class DataCleaning:
             df_clean = df_clean.dropna()
             return df_clean
 
-
         def clean_card_data(self, df):
             df = df.dropna()
             df = df.replace('Err', pd.NA)
@@ -25,7 +25,6 @@ class DataCleaning:
         def clean_store_data(df):
             df = df.dropna()
             return df
-
 
         def convert_product_weights(self, products: pd.DataFrame) -> pd.DataFrame:
             products['weight_unit'] = products['weight'].str.extract(r'(\D+)')
@@ -37,14 +36,12 @@ class DataCleaning:
             products.drop('weight_unit', axis=1, inplace=True)
             return products
 
-
         def clean_products_data(self, products: pd.DataFrame) -> pd.DataFrame:
             products.dropna(inplace=True)
             products.drop_duplicates(inplace=True)
             products.columns = products.columns.str.lower()
             products = self.convert_product_weights(products)
             return products
-
 
         def clean_orders_data(self, df):
             df.drop(['first_name', 'last_name', '1'], axis=1, inplace=True)

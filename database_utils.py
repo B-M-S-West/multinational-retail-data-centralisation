@@ -1,6 +1,6 @@
-import yaml
 from sqlalchemy import create_engine
 from sqlalchemy import inspect
+import yaml
 
 
 class DatabaseConnector:
@@ -17,13 +17,11 @@ class DatabaseConnector:
             db_creds = yaml.safe_load(file)
         return db_creds
 
-
     @staticmethod
     def init_db_engine():
         db_creds = DatabaseConnector.read_db_creds('db_creds.yaml')
         engine = create_engine(f"postgresql://{db_creds['RDS_USER']}:{db_creds['RDS_PASSWORD']}@{db_creds['RDS_HOST']}:{db_creds['RDS_PORT']}/{db_creds['RDS_DATABASE']}")
         return engine
-    
 
     @staticmethod
     def list_db_tables():
@@ -31,7 +29,6 @@ class DatabaseConnector:
         inspector = inspect(engine)
         table_names = inspector.get_table_names()
         return table_names
-
 
     @classmethod
     def upload_to_db(cls, df, table_name, db_name, db_user, db_password, db_host, db_port):
