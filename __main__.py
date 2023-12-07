@@ -63,5 +63,5 @@ events_data = data_extractor.extract_from_s3_json(s3_address, date_key)
 # clean the dates
 cleaned_events_data = data_cleaning.clean_dates(events_data)
 
-# Upload the cleaned orders data to the 'orders_table' table
+# Upload the cleaned events data to the 'dim_date_times' table
 db_connector.upload_to_db(cleaned_events_data, 'dim_date_times', db_creds['RDS_DATABASE'], db_creds['RDS_USER'], db_creds['RDS_PASSWORD'], db_creds['RDS_HOST'], db_creds['RDS_PORT'])
