@@ -21,7 +21,8 @@ To install and run this project:
 ## Usage Instructions
 To use the program:
 
-1. Run the script.
+1. Run the script by typing 'python __main__.py' in your terminal
+2. Once this has run you can then run 'database.sql' to make adjustments to the database
 
 ## File Structure
 The project has the following structure:
@@ -32,6 +33,7 @@ The project has the following structure:
 - 'database_utils.py': This is the Python script that connects to the database and uploads
 - 'db_creds.yaml': This contains the details to access the original database
 - 'local_db_creds.yaml': This contains the details to access the database on the local area 
+- 'database.sql': This contains the SQL statements that make the alterations to the table and set primary and foreign keys
 
 ## License Information
 This project is licensed under the MIT License. See the LICENSE file for details.
