@@ -20,6 +20,7 @@ ALTER TABLE dim_store_details ALTER COLUMN store_code TYPE VARCHAR(11) USING sto
 ALTER TABLE dim_store_details ALTER COLUMN staff_numbers TYPE SMALLINT USING staff_numbers::SMALLINT;
 ALTER TABLE dim_store_details ALTER COLUMN opening_date TYPE DATE USING opening_date::DATE;
 ALTER TABLE dim_store_details ALTER COLUMN store_type TYPE VARCHAR(255) USING store_type::VARCHAR(255);
+UPDATE dim_store_details SET latitude = NULL WHERE latitude = 'N/A';
 ALTER TABLE dim_store_details ALTER COLUMN latitude TYPE FLOAT USING latitude::FLOAT;
 ALTER TABLE dim_store_details ALTER COLUMN country_code TYPE VARCHAR(2) USING country_code::VARCHAR(2);
 ALTER TABLE dim_store_details ALTER COLUMN continent TYPE VARCHAR(255) USING continent::VARCHAR(255);
@@ -36,7 +37,7 @@ END;
 
 ALTER TABLE dim_products ALTER COLUMN product_price TYPE FLOAT USING product_price::FLOAT;
 ALTER TABLE dim_products ALTER COLUMN weight TYPE FLOAT USING weight::FLOAT;
-ALTER TABLE dim_products ALTER COLUMN EAN TYPE VARCHAR(255) USING EAN::VARCHAR(255);
+ALTER TABLE dim_products ALTER COLUMN "EAN" TYPE VARCHAR(255) USING "EAN"::VARCHAR(255);
 ALTER TABLE dim_products ALTER COLUMN product_code TYPE VARCHAR(11) USING product_code::VARCHAR(11);
 ALTER TABLE dim_products ALTER COLUMN date_added TYPE DATE USING date_added::DATE;
 ALTER TABLE dim_products ALTER COLUMN uuid TYPE UUID USING uuid::UUID
@@ -65,3 +66,4 @@ ALTER TABLE orders_table ADD CONSTRAINT orders_table_fk2 FOREIGN KEY (card_numbe
 ALTER TABLE orders_table ADD CONSTRAINT orders_table_fk3 FOREIGN KEY (store_code) REFERENCES dim_store_details (store_code);
 ALTER TABLE orders_table ADD CONSTRAINT orders_table_fk4 FOREIGN KEY (product_code) REFERENCES dim_products (product_code);
 ALTER TABLE orders_table ADD CONSTRAINT orders_table_fk5 FOREIGN KEY (date_uuid) REFERENCES dim_date_times (date_uuid);
+

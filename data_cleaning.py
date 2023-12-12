@@ -1,4 +1,3 @@
-from wsgiref.types import ErrorStream
 import pandas as pd
 import numpy as np
 
@@ -10,7 +9,7 @@ class DataCleaning:
             df['join_date'] = pd.to_datetime(df['join_date'], errors='coerce')
             df["address"] = df["address"].str.replace('\W', ' ', regex=True)
             df['country_code'] = df['country_code'].replace('GGB', 'GB')
-            df.dropna(how='all')
+            df = df[df['user_uuid'].str.len()>=12]
             return df
 
         def clean_card_data(self, df):
@@ -45,11 +44,13 @@ class DataCleaning:
         def clean_products_data(self, products: pd.DataFrame) -> pd.DataFrame:
             products['date_added'] = pd.to_datetime(products['date_added'], errors='coerce')
             products['product_code'] = products['product_code'].str.upper()
-            products.dropna(how='all') # need to change to drop based upon two columns being null and remove random text rows
+            products.dropna(subset = ['uuid'], inplace=True)
+            products = products[products['uuid'].str.len()>=12]
             return products
 
         def clean_orders_data(self, df):
             df.drop(['level_0', 'first_name', 'last_name', '1'], axis=1, inplace=True)
+            df['product_code'] = df['product_code'].str.upper()
             return df
         
         def clean_dates(self, df):
