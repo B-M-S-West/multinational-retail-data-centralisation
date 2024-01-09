@@ -4,7 +4,8 @@ import yaml
 
 
 class DatabaseConnector:
-
+#NOTE: If we had a constructor here, we could automate the reading of credentials & engine creation 
+#upon class initilisation
 
     @staticmethod
     def read_db_creds(file_name):
@@ -21,9 +22,11 @@ class DatabaseConnector:
         with open(file_name, 'r') as file:
             db_creds = yaml.safe_load(file)
         return db_creds
-
-    @staticmethod
-    def init_db_engine():
+    
+    #NOTE: Staticmethods are used for functions that they're behaviour suits a certian class but isn't imperitive 
+    #for the class to function, in this case methods like init_db_engine are imperitive for the class so should be
+    #a normal method
+    def init_db_engine(self):
         """
         Initializes the database engine.
 
@@ -47,21 +50,22 @@ class DatabaseConnector:
         return table_names
 
     @classmethod
-    def upload_to_db(cls, df, table_name, db_name, db_user, db_password, db_host, db_port):
+    def upload_to_db(cls, df, table_name, db_creds):
         """
         Uploads a DataFrame to a PostgreSQL database table.
 
         Args:
             df (pandas.DataFrame): The DataFrame to be uploaded.
             table_name (str): The name of the table to upload the DataFrame to.
-            db_name (str): The name of the database.
-            db_user (str): The username for the database.
-            db_password (str): The password for the database.
-            db_host (str): The host address of the database.
-            db_port (str): The port number of the database.
+            db_creds (dictionary): Dictionary containing the database credentials.
 
         Returns:
             None
         """
+        db_user = db_creds['RDS_USER']
+        db_password = db_creds['RDS_PASSWORD']
+        db_host = db_creds['RDS_HOST']
+        db_port = db_creds['RDS_PORT']
+        db_name = db_creds['RDS_DATABASE']
         engine = create_engine(f'postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}')
         df.to_sql(table_name, engine, if_exists='replace', index=False)

@@ -5,7 +5,8 @@
 2. Installation Instructions
 3. Usage Instructions
 4. File Structure
-5. License Information
+5. SQL Query
+6. License Information
 
 ## Project Description
 Project to make the sales data of a company more accessible from one centralised location. The first step is to produce a system to store the current company data in a database so that it is accessed from one centralised location and act as a single source for all sales data. The second part is to query the database to get up-to-date metrics for the business.
@@ -13,16 +14,38 @@ Project to make the sales data of a company more accessible from one centralised
 ## Installation Instructions
 To install and run this project:
 
-1. Clone the repository or download the files.
+1. Clone the repository or download the files to your local machine
+```
+{
+    git clone https://github.com/B-M-S-West/multinational-retail-data-centralisation.git
+}
+```
 2. Make sure you have a 'db_creds.yaml' and 'local_db_creds.yaml' file so that you can access the database in your root system
+-   Create a YAML file for each
+-   Add the following content to each and replace with the database credentials
+```
+{
+    username: your_username
+    password: your_password
+    host: your_host
+    port: your_port
+    database: your_database
+}
+```
 3. Ensure you have Python installed on your machine.
 4. Configure your environment
-4. Run the script using a Python interpreter.
+    Required python packages - Pandas, Numpy, boto3, pyyaml, sqlalchemy, tabula, requests, os
+5. Run the script using a Python interpreter.
 
 ## Usage Instructions
 To use the program:
 
-1. Run the script by typing 'python __main__.py' in your terminal
+1. Run the script by using the following in your terminal
+```
+{
+    python __main__.py
+}
+```
 2. Once this has run you can then run 'database.sql' to make adjustments to the database
 3. Each of the files in the 'queries' folder can be run to access the data
 

@@ -9,6 +9,13 @@ import tabula
 
 class DataExtractor:
 
+    def __init__(self, headers):
+        """
+        Initializes an instance of the class with the given headers.
+
+        :param headers: The headers for the instance.
+        """
+        self.headers = headers
 
     def read_rds_table(self, DatabaseConnector, table_name):
         """
@@ -40,20 +47,13 @@ class DataExtractor:
         df = pd.concat(dfs)
         return df
 
-    def __init__(self, headers):
-        """
-        Initializes an instance of the class with the given headers.
-
-        :param headers: The headers for the instance.
-        """
-        self.headers = headers
-
     def list_number_of_stores(self, endpoint):
         """
         Initializes an instance of the class with the given headers.
 
         :param headers: The headers for the instance.
         """
+        #NOTE: Great exception handling here!!
         response = requests.get(endpoint, headers=self.headers)
         if response.status_code == 200:
             return response.json()
@@ -67,6 +67,7 @@ class DataExtractor:
 
         :param headers: The headers for the instance.
         """
+        #NOTE: Your readability here is perfect
         number_of_stores = num_stores['number_stores']
         data = []
         for i in range(number_of_stores):
@@ -74,7 +75,7 @@ class DataExtractor:
             data.append(store_data.json())
         return pd.DataFrame(data)
 
-    def extract_from_s3(self, s3_address: str, key) -> pd.DataFrame:
+    def extract_from_s3(self, key) -> pd.DataFrame:
         """
         Initializes an instance of the class with the given headers.
 
@@ -85,7 +86,7 @@ class DataExtractor:
         df = pd.read_csv(obj['Body'])
         return df
 
-    def extract_from_s3_json(self, s3_address: str, key):
+    def extract_from_s3_json(self, key):
         """
         Extracts data from a JSON file stored on an S3 bucket.
 
