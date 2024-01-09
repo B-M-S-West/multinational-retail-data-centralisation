@@ -67,31 +67,48 @@ The project has the following structure:
 ## SQL Query Results
 1. The Operations team would like to know which countries we currently operate 
 in and which country now has the most stores.
+
 ![Alt text](results/image.png)
+
 2. The business stakeholders would like to know which locations currently have the most stores.
 They would like to close some stores before opening more in other locations.
 Find out which locations have the most stores currently.
+
 ![Alt text](results/image-1.png)
+
 3. Query the database to find out which months have produced the most sales.
+
 ![Alt text](results/image-2.png)
+
 4. The company is looking to increase its online sales.
 They want to know how many sales are happening online vs offline.
 Calculate how many products were sold and the amount of sales made for online and offline purchases.
+
 ![Alt text](results/image-3.png)
+
 5. The sales team wants to know which of the different store types is generated the most revenue so they know where to focus.
 Find out the total and percentage of sales coming from each of the different store types.
+
 ![Alt text](results/image-4.png)
+
 6. The company stakeholders want assurances that the company has been doing well recently.
 Find which months in which years have had the most sales historically.
+
 ![Alt text](results/image-5.png)
+
 7. The operations team would like to know the overall staff numbers in each location around the world.
 Perform a query to determine the staff numbers in each of the countries the company sells in.
+
 ![Alt text](results/image-6.png)
+
 8. The sales team is looking to expand their territory in Germany. 
 Determine which type of store is generating the most sales in Germany.
+
 ![Alt text](results/image-7.png)
+
 9. Sales would like the get an accurate metric for how quickly the company is making sales.
 Determine the average time taken between each sale grouped by year.
+
 ![Alt text](results/image-8.png)
 
 ## License Information
