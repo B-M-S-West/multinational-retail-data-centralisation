@@ -2,11 +2,11 @@
 
 ## Table of Contents
 1. [Project Description](#project-description)
-2. Installation Instructions
-3. Usage Instructions
-4. File Structure
-5. SQL Query Results
-6. License Information
+2. [Installation Instructions](#installation-instruction)
+3. [Usage Instructions](#usage-instruction)
+4. [File Structure](#file-structure)
+5. [SQL Query Results](#sql-query-results)
+6. [License Information](#license-information)
 
 ## Project Description
 Project to make the sales data of a company more accessible from one centralised location. The first step is to produce a system to store the current company data in a database so that it is accessed from one centralised location and act as a single source for all sales data. The second part is to query the database to get up-to-date metrics for the business.
