@@ -1,7 +1,7 @@
-# multinational-retail-data-centralisation
+# Multinational Retail Data Centralisation
 
 ## Table of Contents
-1. Project Description
+1. [Project Description]
 2. Installation Instructions
 3. Usage Instructions
 4. File Structure
