@@ -4,8 +4,7 @@ import yaml
 
 
 class DatabaseConnector:
-#NOTE: If we had a constructor here, we could automate the reading of credentials & engine creation 
-#upon class initilisation
+
 
     @staticmethod
     def read_db_creds(file_name):
@@ -23,9 +22,6 @@ class DatabaseConnector:
             db_creds = yaml.safe_load(file)
         return db_creds
     
-    #NOTE: Staticmethods are used for functions that they're behaviour suits a certian class but isn't imperitive 
-    #for the class to function, in this case methods like init_db_engine are imperitive for the class so should be
-    #a normal method
     def init_db_engine(self):
         """
         Initializes the database engine.
