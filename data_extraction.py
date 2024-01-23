@@ -53,7 +53,6 @@ class DataExtractor:
 
         :param headers: The headers for the instance.
         """
-        #NOTE: Great exception handling here!!
         response = requests.get(endpoint, headers=self.headers)
         if response.status_code == 200:
             return response.json()
@@ -67,7 +66,6 @@ class DataExtractor:
 
         :param headers: The headers for the instance.
         """
-        #NOTE: Your readability here is perfect
         number_of_stores = num_stores['number_stores']
         data = []
         for i in range(number_of_stores):
